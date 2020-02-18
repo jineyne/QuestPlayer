@@ -11,6 +11,7 @@ import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.KeyEvent;
@@ -50,6 +51,7 @@ import com.qsp.player.util.ViewUtil;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -484,9 +486,14 @@ public class MainActivity extends AppCompatActivity implements PlayerView {
         for (int i = 0; i < MAX_SAVE_SLOTS; ++i) {
             final String filename = getSaveSlotFilename(i);
             final DocumentFile file = savesDir.findFile(filename);
-            String title = String.format(
-                    getString(file != null ? R.string.slotPresent : R.string.slotEmpty),
-                    i + 1);
+            String title = null;
+
+            if (file != null) {
+                final String lastMod = (String) DateFormat.format("yyyy-MM-dd kk:mm:ss", file.lastModified());
+                title = String.format(getString(R.string.slotPresent), i + 1, lastMod);
+            } else {
+                title = String.format("Slot %d - [Empty]", i + 1);
+            }
 
             item = subMenu.add(title);
             item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
