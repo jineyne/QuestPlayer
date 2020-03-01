@@ -492,7 +492,7 @@ public class MainActivity extends AppCompatActivity implements PlayerView {
                 final String lastMod = (String) DateFormat.format("yyyy-MM-dd kk:mm:ss", file.lastModified());
                 title = String.format(getString(R.string.slotPresent), i + 1, lastMod);
             } else {
-                title = String.format("Slot %d - [Empty]", i + 1);
+                title = getString(R.string.slotEmpty, i + 1);
             }
 
             item = subMenu.add(title);
