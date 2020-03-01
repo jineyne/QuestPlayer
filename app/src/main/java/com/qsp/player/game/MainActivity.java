@@ -490,7 +490,7 @@ public class MainActivity extends AppCompatActivity implements PlayerView {
 
             if (file != null) {
                 final String lastMod = (String) DateFormat.format("yyyy-MM-dd kk:mm:ss", file.lastModified());
-                title = String.format(getString(R.string.slotPresent), i + 1, lastMod);
+                title = getString(R.string.slotPresent, i + 1, lastMod);
             } else {
                 title = getString(R.string.slotEmpty, i + 1);
             }
